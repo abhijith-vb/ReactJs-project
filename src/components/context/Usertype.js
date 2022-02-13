@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{createContext} from 'react';
 
 
-const userTypeContext = React.createContext();
-export const userTypeProvider = userTypeContext.Provider;
-export default userTypeContext;
+const UserTypeContext = createContext();
+export const UserTypeProvider = UserTypeContext.Provider;
+export default UserTypeContext;

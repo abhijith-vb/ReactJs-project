@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext, Fragment } from "react";
-import axios from "axios";
-import { nanoid } from "nanoid";
-import ReadOnlyRow from "./ReadOnlyRow";
-import EditableRow from "./EditableRow";
-import UserTypeContext from "./context/Usertype";
+import React, { useEffect, useState, useContext, Fragment } from 'react';
+import axios from 'axios';
+import { nanoid } from 'nanoid';
+import ReadOnlyRow from './ReadOnlyRow';
+import EditableRow from './EditableRow';
+import UserTypeContext from './context/Usertype';
 
 const Client = () => {
-  const url = "https://jsonplaceholder.typicode.com/users";
+  const url = 'https://jsonplaceholder.typicode.com/users';
 
   const userTypes = useContext(UserTypeContext); //context
 
@@ -14,22 +14,22 @@ const Client = () => {
   const [isLoading, setLoading] = useState(true); //loading img data
 
   const [addFormData, setAddFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: '',
+    email: '',
+    phone: ''
   });
 
   const [editFormData, setEditformData] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: '',
+    email: '',
+    phone: ''
   });
 
   const [editContactId, setEditContactId] = useState(null);
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
+    const fieldName = event.target.getAttribute('name');
     const fieldValue = event.target.value;
 
     const newFormData = { ...addFormData };
@@ -40,7 +40,7 @@ const Client = () => {
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
+    const fieldName = event.target.getAttribute('name');
     const fieldValue = event.target.value;
 
     const newFormData = { ...editFormData };
@@ -55,7 +55,7 @@ const Client = () => {
       id: nanoid(),
       name: addFormData.name,
       email: addFormData.email,
-      phone: addFormData.phone,
+      phone: addFormData.phone
     };
     const newContacts = [...data, newContact];
     setData(newContacts);
@@ -67,7 +67,7 @@ const Client = () => {
       id: editContactId,
       name: editFormData.name,
       email: editFormData.email,
-      phone: editFormData.phone,
+      phone: editFormData.phone
     };
     const newContacts = [...data];
     const index = data.findIndex((user) => user.id === editContactId);
@@ -84,7 +84,7 @@ const Client = () => {
     const formValues = {
       name: user.name,
       email: user.email,
-      phone: user.phone,
+      phone: user.phone
     };
 
     setEditformData(formValues);
@@ -110,10 +110,7 @@ const Client = () => {
       return (
         <Fragment key={index}>
           {editContactId === user.id ? (
-            <EditableRow
-              editFormData={editFormData}
-              handleEditFormChange={handleEditFormChange}
-            />
+            <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} />
           ) : (
             <ReadOnlyRow
               userTypes={userTypes.user}
@@ -134,8 +131,7 @@ const Client = () => {
           <img
             className="image"
             src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
-            alt="images"
-          ></img>
+            alt="images"></img>
         </div>
       )}
 
@@ -150,7 +146,7 @@ const Client = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                {userTypes.user === "ADMIN-USER" && <th>Actions</th>}
+                {userTypes.user === 'ADMIN-USER' && <th>Actions</th>}
               </tr>
             </thead>
             <tbody>{renderTable({})}</tbody>
@@ -165,22 +161,19 @@ const Client = () => {
             name="name"
             required="required"
             placeholder="enter name"
-            onChange={handleAddFormChange}
-          ></input>
+            onChange={handleAddFormChange}></input>
           <input
             type="text"
             name="email"
             required="required"
             placeholder="enter email"
-            onChange={handleAddFormChange}
-          ></input>
+            onChange={handleAddFormChange}></input>
           <input
             type="text"
             name="phone"
             required="required"
             placeholder="enter phoneNo"
-            onChange={handleAddFormChange}
-          ></input>
+            onChange={handleAddFormChange}></input>
           <button type="submit">Add</button>
         </form>
       </div>
